@@ -1,0 +1,10 @@
+[user]
+	email = stelios.spyrounakos@gmail.com
+	name = Stelios Spyrounakos
+[color]
+	ui = auto
+[init]
+	defaultBranch = main
+[core]
+	editor = vim --nofork
+	autocrlf = input

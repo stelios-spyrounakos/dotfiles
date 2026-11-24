@@ -1,0 +1,249 @@
+""" General options """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set nocompatible                        " Disable compatibility with vi
+
+set encoding=utf-8
+
+filetype on                             " Enable file type detection
+filetype plugin on                      " Enable plugins and load plugin for the detected file type
+filetype indent on                      " Load an indent file for the detected file type
+
+set number                              " Enable line numbers
+set cursorline                          " Highlight current line
+set ruler                               " Display the current cursor position in the lower right corner
+set colorcolumn=80                      " Show a vertical column
+highlight ColorColumn ctermbg=236 guibg=#262626
+set wrap                                " Enable line wrapping
+set whichwrap=b,<,h,>,l,[,]             " Movements allowed to wrap ([, ] so that <, > works in insert mode)
+set scrolloff=3                         " Offset from the window border when scrolling
+"set nofoldenable                        " Disables folding
+
+set expandtab                           " Use spaces instead of tabs
+set tabstop=4
+set shiftwidth=4
+set autoindent                          " Use the indent of the previous line
+
+syntax on                               " Enable syntax highlighting
+
+set showmatch                           " Show matching parentheses
+set showmode                            " Show the mode you are on the last line
+set showcmd                             " Show partial command in the last line of the screen
+
+set mouse=a                             " Enable mouse support
+
+set listchars=tab:>-,trail:-            " Every tab will be displayed as ">--..." and trailing white space as "-".
+
+set history=100                         " Number of commands and search patterns to keep in the history
+
+set undofile                            " Saves undo history to an undo file when writing a buffer, and restores
+                                        " undo history from the same file on buffer read
+
+"set wildmenu                           " Enable auto completion menu after pressing TAB
+"set wildmode=list:longest              " Make wildmenu behave similar to Bash completion
+"set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
+
+set conceallevel=1                      " Useful e.g. for Markdown or LaTeX syntax concealment
+
+" Ensure vim starts a server (e.g. for inverse search functionality)
+" (This will only work for a clientserver-enabled vim installation and is needed only for tui-vim)
+if empty(v:servername) && exists('*remote_startserver')
+  call remote_startserver('VIM')
+endif
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+""" Search options """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set hlsearch                            " Highlight search results
+set incsearch                           " Enable incremental highlighting
+set ignorecase                          " Ignore the case of letters during search
+set smartcase                           " Override the ignorecase option if searching for capital letters
+set showmatch                           " Show matching words during a search
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+""" Mappings """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let mapleader = '\'                                             " Set the backslash as the leader key
+
+noremap <leader>s <Cmd>set spell!<CR>                           " Τoggle Vim's spell-checking
+noremap <leader>b <Cmd>bnext<CR>                                " Move to the next Vim buffer
+noremap <leader>U <Cmd>call UltiSnips#RefreshSnippets()<CR>     " Refresh UltiSnips
+
+noremap <leader>p i(<Esc>ea)<Esc>                               " Add parentheses around a word
+noremap <leader>c i{<Esc>ea}<Esc>                               " Add curly braces around a word
+noremap <leader>b i[<Esc>ea]<Esc>                               " Add braces around a word
+
+" Press <leader>\ to jump back to the last cursor position.
+"nnoremap <leader>\ ``
+
+" Type jj to exit insert mode quickly.
+"inoremap jj <Esc>
+
+" Press the space bar to type the : character in command mode.
+"nnoremap <space> :
+
+" Center the cursor vertically when moving to the next word during a search.
+"nnoremap n nzz
+"nnoremap N Nzz
+
+" You can split the window in Vim by typing :split or :vsplit.
+" Navigate the split view easier by pressing CTRL+j, CTRL+k, CTRL+h, or CTRL+l.
+"nnoremap <c-j> <c-w>j
+"nnoremap <c-k> <c-w>k
+"nnoremap <c-h> <c-w>h
+"nnoremap <c-l> <c-w>l
+
+" Resize split windows using arrow keys by pressing:
+" CTRL+UP, CTRL+DOWN, CTRL+LEFT, or CTRL+RIGHT.
+"noremap <c-up> <c-w>+
+"noremap <c-down> <c-w>-
+"noremap <c-left> <c-w>>
+"noremap <c-right> <c-w><
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+""" Plugins """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Specify where plugins are installed
+call plug#begin('~/.config/vim/plugged')
+
+" File explorer
+"Plug 'preservim/nerdtree'
+
+" Git integration
+"Plug 'tpope/vim-fugitive'
+
+" Statusline customization
+"Plug 'vim-airline/vim-airline'
+
+" Auto-completion framework
+"Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+" Fuzzy file search
+"Plug 'junegunn/fzf.vim'
+
+" ALE (Asynchronous Lint Engine)
+Plug 'dense-analysis/ale'
+
+" Colorschemes
+Plug 'morhetz/gruvbox'
+Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
+
+" VimTex for LaTeX
+Plug 'lervag/vimtex', { 'tag': 'v2.16' }
+
+" Markdown support and preview
+Plug 'preservim/vim-markdown'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' }
+
+" Snippets
+Plug 'SirVer/ultisnips'
+
+call plug#end()
+
+
+
+" NERDTree
+" Open NERDTree with Ctrl+n
+"map <C-n> :NERDTreeToggle<CR>
+
+" Map the F3 key to toggle NERDTree open and close.
+"nnoremap <F3> :NERDTreeToggle<cr>
+
+" Have nerdtree ignore certain files and directories.
+"let NERDTreeIgnore=['\.git$', '\.jpg$', '\.mp4$', '\.ogg$', '\.iso$', '\.pdf$', '\.pyc$', '\.odt$', '\.png$', '\.gif$', '\.db$']
+
+
+
+" vim-airline
+" Enable powerline fonts (optional)
+"let g:airline_powerline_fonts = 1
+
+
+
+" coc.nvim
+" Use Tab for navigating completion menu
+"inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+"inoremap <silent><expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
+
+" Trigger completion with Ctrl+Space
+"inoremap <silent><expr> <C-Space> coc#refresh()
+
+
+
+" fzf.vim
+" Map Ctrl+p to open fuzzy file finder
+"map <C-p> :Files<CR>
+
+" VimTex configuration
+let g:vimtex_view_method = 'zathura_simple'
+let g:vimtex_complete_close_braces = 1      " Add a closing brace after completion
+
+" Vim markdown configuration
+let g:vim_markdown_no_extensions_in_markdown = 1    " Do not require .md extensions for Markdown links
+let g:vim_markdown_edit_url_in = 'tab'              " When following a link the file will be opened in a
+                                                    " new tab (the default is the current buffer)
+let g:vim_markdown_folding_disabled = 1
+
+" Markdown preview configuration
+let g:mkdp_auto_close = 0           " Do not auto close current preview window when changing Markdown buffer
+let g:mkdp_theme = 'dark'           " (The default is defined according to system preferences)
+
+" Ultisnips configuration
+let g:UltiSnipsExpandTrigger = '<Tab>'                              " Tab to expand snippets
+let g:UltiSnipsJumpForwardTrigger = '<Tab>'                         " Tab to move forward through tabstops
+let g:UltiSnipsJumpBackwardTrigger = '<S-Tab>'                      " Shift-Tab to move backward
+let g:UltiSnipsSnippetDirectories=[$HOME.'.config/vim/UltiSnips']   " Optimization (only searches here)
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+""" Colors """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set termguicolors                      " Enable true colors
+set t_Co=256                           " 256 colors, if the terminal supports them
+set background=dark
+
+"let g:gruvbox_contrast_dark='hard'
+colorscheme gruvbox                    " Set the gruvbox plugin colorscheme
+"colorscheme retrobox
+"colorscheme catppuccin-mocha          " Set the catppuccin plugin mocha colorscheme
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" STATUS LINE ------------------------------------------------------------ {{{
+
+" Clear status line when vimrc is reloaded.
+"set statusline=
+
+" Status line left side.
+"set statusline+=\ %F\ %M\ %Y\ %R
+
+" Use a divider to separate the left side from the right side.
+"set statusline+=%=
+
+" Status line right side.
+"set statusline+=\ ascii:\ %b\ hex:\ 0x%B\ row:\ %l\ col:\ %c\ percent:\ %p%%
+
+" Show the status on the second to last line.
+"set laststatus=2
+
+
+
+" %F – Display the full path of the current file
+" %M – Modified flag shows if file is unsaved
+" %Y – Type of file in the buffer
+" %R – Displays the read-only flag
+" %b – Shows the ASCII/Unicode character under cursor
+" 0x%B – Shows the hexadecimal character under cursor
+" %l – Display the row number
+" %c – Display the column number
+" %p%% – Show the cursor percentage from the top of the file
+
+" }}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

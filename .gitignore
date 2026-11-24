@@ -1,0 +1,11 @@
+*~
+
+.debris/
+.directory
+*.mega
+
+zsh/zhistory
+zsh/.zsh_history
+zsh/.zcompdump*
+
+vim/plugged/
