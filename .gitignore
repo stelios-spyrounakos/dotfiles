@@ -9,3 +9,6 @@ zsh/.zsh_history
 zsh/.zcompdump*
 
 vim/plugged/
+
+backgrounds/*
+!backgrounds/.gitkeep
