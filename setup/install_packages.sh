@@ -6,7 +6,7 @@ set -o pipefail         # If any command in a pipeline fails, the whole pipeline
 # Block running as root because AUR helpers refuse to run as root.
 # (EUID holds the Effective User ID and root is 0)
 if [[ "$EUID" -eq 0 ]]; then
-    echo "ERROR: Please do not run this script as root."
+    echo "ERROR: Do not run this script as root."
     exit 1
 fi
 
